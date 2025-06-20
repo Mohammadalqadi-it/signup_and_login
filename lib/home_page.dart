@@ -5,6 +5,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Remove previous routes after the first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Page"),
@@ -23,13 +28,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(context, (route) => route.isFirst);
-              },
-              child: const Text("Log out"),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-            ),
           ],
         ),
       ),
